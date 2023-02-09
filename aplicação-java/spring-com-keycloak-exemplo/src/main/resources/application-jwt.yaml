@@ -1,0 +1,8 @@
+server:
+  port: 5000
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/realm-oauth2-teste/protocol/openid-connect/certs
