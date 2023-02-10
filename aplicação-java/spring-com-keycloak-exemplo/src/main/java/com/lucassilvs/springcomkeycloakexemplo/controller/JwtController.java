@@ -1,5 +1,6 @@
 package com.lucassilvs.springcomkeycloakexemplo.controller;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Profile("jwt")
 @RequestMapping("/security")
 @RestController
-public class PortalController {
+public class JwtController {
 
     @GetMapping
     public ResponseEntity<String> security(){
