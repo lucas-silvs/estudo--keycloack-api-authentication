@@ -3,6 +3,15 @@
 projeto exemplo para realização de autenticação de requisições com o Keycloak
 utilizando Client Credentials;
 
+## Indice
+1. [Dependencias](#dependencias)
+2. [Autenticação com Client Credentials](#autenticação-com-client-credentials)
+    1. [Configuração Keycloak](#configuração-keycloak)
+    2. [Execução Aplicação Spring boot](#execução-aplicação-spring-boot)
+3. [Autenticação com username password](#autenticação-com-username-password)
+    1. [Configuração Keycloak](#configurac3a7c3a3o-keycloak-1)
+    2. [Execução Aplicação Spring boot](#execuc3a7c3a3o-aplicac3a7c3a3o-spring-boot-1)
+
 ## Dependencias
 Para utilização do Keycloak na aplicação Java, deve adicionar as dependencias abaixo:
 
@@ -18,7 +27,12 @@ implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-ser
 Utilizando o Spring Security para autenticar as requisições e Spring boot Oauth2
 para autenticação utilizando o Oauth2.
 
-## Configuração Keycloak para autenticação Client Credentials
+## Autenticação com Client Credentials
+No primeiro exemplo, iremos configurar o Keycloak para realizar a autenticação das requisições utilizando Client Credentials, uma das forma de autenticação do Keycloak.
+
+
+### Configuração Keycloak
+
 Para realizar o teste, primeiro deve configurar o Keycloak, deve criar um  realm
 para a autenticação com Oauth2.
 
@@ -62,7 +76,10 @@ realizando uma requisição no endpoint http://localhost:5000/security e adicion
 ![authorized_request](https://raw.githubusercontent.com/lucas-silvs/estudo--keycloack-api-authentication/main/aplica%C3%A7%C3%A3o-java/spring-com-keycloak-exemplo/images/authorized_request_java_example.png)
 
 
-## Configuração Keycloak para autenticação username password
+## Autenticação com username password
+Nesse exemplo utilizaremos o recurso de User Credentials do Keycloak, onde podemos granular o acesso utilizando Roles.
+
+### Configuração Keycloak
 
 Outra forma de realizar autenticação é utilizando credenciais de usuários criados no Keycloak, utilizando Roles para granular o acesso.
 Primeiro devemos criar duas roles, user e admin:
