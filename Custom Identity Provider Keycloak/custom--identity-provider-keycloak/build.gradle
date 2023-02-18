@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group 'org.lucassilvs'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    //SPI Keyclaok
+    implementation 'org.keycloak:keycloak-core:20.0.3'
+    implementation 'org.keycloak:keycloak-server-spi:20.0.3'
+    implementation 'org.keycloak:keycloak-server-spi-private:20.0.3'
+    compileOnly 'org.keycloak:keycloak-services:20.0.3'
+
+
+    //jboss
+    implementation 'org.jboss.resteasy:resteasy-client:6.0.3.Final'
+
+    implementation 'javax.ws.rs:javax.ws.rs-api:2.1.1'
+    //Log4J
+    implementation 'org.apache.logging.log4j:log4j-core:2.19.0'
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
