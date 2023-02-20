@@ -1,1 +1,1 @@
-com.lucassilvs.auth.provider.user.CustomUserStorageProviderFactory
+com.lucassilvs.customidentityprovider.provider.CustomUserStorageProviderFactory
