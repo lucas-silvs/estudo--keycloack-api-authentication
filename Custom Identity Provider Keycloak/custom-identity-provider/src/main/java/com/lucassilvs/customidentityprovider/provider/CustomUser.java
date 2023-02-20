@@ -1,4 +1,4 @@
-package com.lucassilvs.auth.provider.user;
+package com.lucassilvs.customidentityprovider.provider;
 
 import org.keycloak.common.util.MultivaluedHashMap;
 import org.keycloak.component.ComponentModel;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.lucassilvs.auth.provider.user;
+package com.lucassilvs.customidentityprovider.provider;
 
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
@@ -45,7 +45,6 @@ public class CustomUserStorageProvider implements UserStorageProvider,
         log.info("[I30] close()");
     }
 
-//    Implementação interface UserQueryProvider
     @Override
     public UserModel getUserById(String id, RealmModel realm) {
         log.info("[I35] getUserById({})",id);
@@ -106,6 +105,7 @@ public class CustomUserStorageProvider implements UserStorageProvider,
         // this is the credentialType
         return supportsCredentialType(credentialType);
     }
+
 
     @Override
     public boolean isValid(RealmModel realm, UserModel user, CredentialInput credentialInput) {

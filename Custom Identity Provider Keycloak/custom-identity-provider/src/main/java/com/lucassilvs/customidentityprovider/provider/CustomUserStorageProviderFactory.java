@@ -1,4 +1,4 @@
-package com.lucassilvs.auth.provider.user;
+package com.lucassilvs.customidentityprovider.provider;
 
 import org.keycloak.component.ComponentModel;
 import org.keycloak.component.ComponentValidationException;
@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.util.List;
-import static com.lucassilvs.auth.provider.user.CustomUserStorageProviderConstants.*;
+import static com.lucassilvs.customidentityprovider.provider.CustomUserStorageProviderConstants.*;
 
 public class CustomUserStorageProviderFactory implements UserStorageProviderFactory<CustomUserStorageProvider> {
     private static final Logger log = LoggerFactory.getLogger(CustomUserStorageProviderFactory.class);

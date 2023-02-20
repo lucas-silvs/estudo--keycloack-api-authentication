@@ -1,4 +1,4 @@
-package com.lucassilvs.auth.provider.user;
+package com.lucassilvs.customidentityprovider.provider;
 
 public final class CustomUserStorageProviderConstants {
     public static final String CONFIG_KEY_JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
