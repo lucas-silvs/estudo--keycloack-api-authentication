@@ -10,71 +10,72 @@ import org.keycloak.storage.UserStorageProviderFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
-import static com.lucassilvs.customidentityprovider.provider.CustomUserStorageProviderEnums.*;
+import static com.lucassilvs.customidentityprovider.provider.CustomUserStorageProviderConstant.*;
 
 public class CustomUserStorageProviderFactory implements UserStorageProviderFactory<CustomUserStorageProvider> {
     private static final Logger log = LoggerFactory.getLogger(CustomUserStorageProviderFactory.class);
     protected final List<ProviderConfigProperty> configMetadata;
-    
+
+    private HttpClient httpClient;
+
+
     public CustomUserStorageProviderFactory() {
-        log.info("[I24] CustomUserStorageProviderFactory created");
+
+        httpClient = HttpClient.newHttpClient();
+        log.info("Iniciando CustomUserStorageProviderFactory ");
 //      Adicionando Campos que serão solicitados para conexão com o Keycloak
         
         // Create config metadata
         configMetadata = ProviderConfigurationBuilder.create()
-//         Driver Banco de dados
+
+//         URL APP Authenticator
           .property()
-            .name(CONFIG_KEY_JDBC_DRIVER.getValorCampo())
-            .label("Driver JDBC")
+            .name(URL_AUTHENTICATOR)
+            .label("URL")
             .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("nome completo da classe do Driver para conexão com banco de dados")
+            .helpText("URL base do serviço de autenticação")
             .add()
-//         URL conexão Banco de dados
-          .property()
-            .name(CONFIG_KEY_JDBC_URL.getValorCampo())
-            .label("JDBC URL")
+        .property()
+            .name(ENDPOINT_AUTHENTICATOR)
+            .label("Endpoint validação Creddencial")
             .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("URL de conexão com o banco de dados")
+            .helpText("Endpoint para autenticação de usuário")
             .add()
-//         Nome usuário banco de dados
-          .property()
-            .name(CONFIG_KEY_DB_USERNAME.getValorCampo())
-            .label("Nome Usuário")
+        .property()
+            .name(ENDPOINT_LOOKUP)
+            .label("Endpoint busca de usuário")
             .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("nome do usuário para conexão com banco de dados")
+            .helpText("Endpoint para para busca de usuário autenticador")
             .add()
-//         Senha usuário banco de dados
-          .property()
-            .name(CONFIG_KEY_DB_PASSWORD.getValorCampo())
-            .label("Senha Usuário")
+        .property()
+            .name(ENDPOINT_HEALTH)
+            .label("Endpoint validação de saúde autenticador")
             .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("Senha do usuário para conexão com banco de dados")
-            .secret(true)
+            .helpText("Endpoint para validação de saúde do serviço de autenticação")
             .add()
-//          Query para validação de conexão
-          .property()
-            .name(CONFIG_KEY_VALIDATION_QUERY.getValorCampo())
-            .label("Query SQL validacao")
-            .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("Query SQL para validação de conexão com banco de dados")
-            .defaultValue("select 1")
-            .add()
-          .build();   
-          
+          .build();
+
+        log.info("Criado CustomUserStorageProviderFactory ");
+
     }
 
     @Override
     public CustomUserStorageProvider create(KeycloakSession ksession, ComponentModel model) {
-        log.info("[I63] creating new CustomUserStorageProvider");
+        log.info("Criando CustomUserStorageProvider");
         return new CustomUserStorageProvider(ksession,model);
     }
 
     @Override
     public String getId() {
         log.info("[I69] getId()");
-        return "custom-user-provider-teste";
+        return "custom-user-provider-quarkus";
     }
 
     
@@ -87,15 +88,40 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
     @Override
     public void validateConfiguration(KeycloakSession session, RealmModel realm, ComponentModel config) throws ComponentValidationException {
         
-       try (Connection c = DbUtil.getConnection(config)) {
-           log.info("validateConfiguration() - Testando conexão..." );
-           c.createStatement().execute(config.get(CONFIG_KEY_VALIDATION_QUERY.getValorCampo()));
-           log.info("validateConfiguration() -  Connection OK !" );
-       }
-       catch(Exception ex) {
-           log.warn("incapaz de validar a conexão com o banco de dados: ex={}", ex.getMessage());
-           throw new ComponentValidationException("Unable to validate database connection",ex);
-       }
+
+        log.info("validateConfiguration() - Testando conexão..." );
+        try {
+//            String urlString = String.format("%s%s", URL_AUTHENTICATOR, ENDPOINT_HEALTH);
+            String urlString = "http://localhost:5000/q/health/live";
+            log.info("URL HEALTH: " + urlString);
+            HttpRequest requestHealth = HttpRequest.newBuilder()
+                    .uri(new URI(urlString))
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = httpClient.send(requestHealth, HttpResponse.BodyHandlers.ofString());
+
+
+
+            if(response.statusCode() != 200){
+                log.warn("Ocorreu erro de validação de saúde no serviço: " + response.statusCode());
+                throw new RuntimeException("Ocorreu erro de validação de saúde no serviço: " + response.statusCode());
+            }
+            log.info("validateConfiguration() -  Connection OK !" );
+
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+
+
+
+
+
     }
 
     @Override
