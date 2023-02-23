@@ -22,19 +22,17 @@ import static com.lucassilvs.customidentityprovider.provider.CustomUserStoragePr
 public class CustomUserStorageProviderFactory implements UserStorageProviderFactory<CustomUserStorageProvider> {
     private static final Logger log = LoggerFactory.getLogger(CustomUserStorageProviderFactory.class);
     protected final List<ProviderConfigProperty> configMetadata;
-
     private HttpClient httpClient;
 
 
     public CustomUserStorageProviderFactory() {
 
         httpClient = HttpClient.newHttpClient();
-        log.info("Iniciando CustomUserStorageProviderFactory ");
+        log.info("Iniciando CustomUserStorageProviderFactory");
 //      Adicionando Campos que serão solicitados para conexão com o Keycloak
         
         // Create config metadata
         configMetadata = ProviderConfigurationBuilder.create()
-
 //         URL APP Authenticator
           .property()
             .name(URL_AUTHENTICATOR)
@@ -42,26 +40,7 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
             .type(ProviderConfigProperty.STRING_TYPE)
             .helpText("URL base do serviço de autenticação")
             .add()
-        .property()
-            .name(ENDPOINT_AUTHENTICATOR)
-            .label("Endpoint validação Creddencial")
-            .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("Endpoint para autenticação de usuário")
-            .add()
-        .property()
-            .name(ENDPOINT_LOOKUP)
-            .label("Endpoint busca de usuário")
-            .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("Endpoint para para busca de usuário autenticador")
-            .add()
-        .property()
-            .name(ENDPOINT_HEALTH)
-            .label("Endpoint validação de saúde autenticador")
-            .type(ProviderConfigProperty.STRING_TYPE)
-            .helpText("Endpoint para validação de saúde do serviço de autenticação")
-            .add()
           .build();
-
         log.info("Criado CustomUserStorageProviderFactory ");
 
     }
@@ -91,8 +70,8 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
 
         log.info("validateConfiguration() - Testando conexão..." );
         try {
-//            String urlString = String.format("%s%s", URL_AUTHENTICATOR, ENDPOINT_HEALTH);
-            String urlString = "http://localhost:5000/q/health/live";
+            System.out.println(ComponentProperties.getUrlBase());
+            String urlString = config.get(URL_AUTHENTICATOR)+"/q/health/live";
             log.info("URL HEALTH: " + urlString);
             HttpRequest requestHealth = HttpRequest.newBuilder()
                     .uri(new URI(urlString))

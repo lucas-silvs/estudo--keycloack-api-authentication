@@ -32,6 +32,8 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
 
+import static com.lucassilvs.customidentityprovider.provider.CustomUserStorageProviderConstant.URL_AUTHENTICATOR;
+
 public class CustomUserStorageProvider implements UserStorageProvider,
         UserLookupProvider,
         CredentialInputValidator {
@@ -69,7 +71,7 @@ public class CustomUserStorageProvider implements UserStorageProvider,
     @Override
     public UserModel getUserByUsername(String username, RealmModel realm) {
         log.info("[I41] getUserByUsername({})", username);
-        String url = String.format("%s%s=%s", model.get(CustomUserStorageProviderConstant.URL_AUTHENTICATOR), model.get(CustomUserStorageProviderConstant.ENDPOINT_LOOKUP), username);
+        String url = String.format("%s/usuario?identificador=%s", model.get(URL_AUTHENTICATOR), username);
 
         HttpRequest buscaUsuarioRequest = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -123,7 +125,7 @@ public class CustomUserStorageProvider implements UserStorageProvider,
         String json = request.toString();
 
         HttpRequest validarCredencialRequest = HttpRequest.newBuilder()
-                .uri(URI.create(String.format("%s%s", model.get(CustomUserStorageProviderConstant.URL_AUTHENTICATOR), model.get(CustomUserStorageProviderConstant.ENDPOINT_AUTHENTICATOR))))
+                .uri(URI.create(String.format("%s/usuario/validar-credencial", model.get(URL_AUTHENTICATOR))))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(json))
                 .build();
