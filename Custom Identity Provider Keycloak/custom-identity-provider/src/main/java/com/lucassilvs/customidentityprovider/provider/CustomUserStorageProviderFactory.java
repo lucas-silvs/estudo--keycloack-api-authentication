@@ -70,7 +70,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
 
         log.info("validateConfiguration() - Testando conexão..." );
         try {
-            System.out.println(ComponentProperties.getUrlBase());
             String urlString = config.get(URL_AUTHENTICATOR)+"/q/health/live";
             log.info("URL HEALTH: " + urlString);
             HttpRequest requestHealth = HttpRequest.newBuilder()
