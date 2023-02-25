@@ -121,6 +121,9 @@ public class CustomUserStorageProvider implements UserStorageProvider,
             return false;
         }
         StorageId sid = new StorageId(user.getId());
+        log.info("Teste Identificador -- user.getUsername(): " + user.getUsername() );
+        log.info("Teste Identificador:  user.getId()" + user.getId() );
+        log.info("Teste Identificador:  user.getEmail()" + user.getEmail() );
         String username = sid.getExternalId();
         UsuarioCredencialRequest request = new UsuarioCredencialRequest(username, credentialInput.getChallengeResponse());
         String json = request.toString();
