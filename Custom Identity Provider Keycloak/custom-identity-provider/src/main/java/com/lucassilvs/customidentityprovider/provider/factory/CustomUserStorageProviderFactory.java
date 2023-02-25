@@ -1,8 +1,12 @@
-package com.lucassilvs.customidentityprovider.provider;
+package com.lucassilvs.customidentityprovider.provider.factory;
 
+import com.lucassilvs.customidentityprovider.provider.provider.CustomUserStorageProvider;
+import org.keycloak.Config;
+import org.keycloak.component.ComponentFactory;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.component.ComponentValidationException;
 import org.keycloak.models.KeycloakSession;
+import org.keycloak.models.KeycloakSessionFactory;
 import org.keycloak.models.RealmModel;
 import org.keycloak.provider.ProviderConfigProperty;
 import org.keycloak.provider.ProviderConfigurationBuilder;
@@ -26,7 +30,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
 
 
     public CustomUserStorageProviderFactory() {
-
         httpClient = HttpClient.newHttpClient();
         log.info("Iniciando CustomUserStorageProviderFactory");
 //      Adicionando Campos que serão solicitados para conexão com o Keycloak
@@ -44,7 +47,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
         log.info("Criado CustomUserStorageProviderFactory ");
 
     }
-
     @Override
     public CustomUserStorageProvider create(KeycloakSession ksession, ComponentModel model) {
         log.info("Criando CustomUserStorageProvider");
@@ -52,12 +54,31 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
     }
 
     @Override
-    public String getId() {
-        log.info("[I69] getId()");
-        return "custom-user-provider-quarkus";
+    public void init(Config.Scope scope) {
+        // não faz nada meu nobrer
     }
 
-    
+    @Override
+    public void postInit(KeycloakSessionFactory keycloakSessionFactory) {
+        // não faz nada meu nobrer
+    }
+
+    @Override
+    public void close() {
+    // não faz nada meu nobrer
+    }
+
+    @Override
+    public String getId() {
+        log.info("[I69] getId()");
+        return "custom-user-provider-quarkus-2.0.0";
+    }
+
+    @Override
+    public String getHelpText() {
+        return "";
+    }
+
     // Configuration support methods
     @Override
     public List<ProviderConfigProperty> getConfigProperties() {
@@ -66,8 +87,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
 
     @Override
     public void validateConfiguration(KeycloakSession session, RealmModel realm, ComponentModel config) throws ComponentValidationException {
-        
-
         log.info("validateConfiguration() - Testando conexão..." );
         try {
             String urlString = config.get(URL_AUTHENTICATOR)+"/q/health/live";
@@ -78,7 +97,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
                     .build();
 
             HttpResponse<String> response = httpClient.send(requestHealth, HttpResponse.BodyHandlers.ofString());
-
 
 
             if(response.statusCode() != 200){
@@ -94,12 +112,6 @@ public class CustomUserStorageProviderFactory implements UserStorageProviderFact
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
-
-
-
-
-
     }
 
     @Override

@@ -22,17 +22,25 @@
             <version>${keycloak.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-adapter-core -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-adapter-spi</artifactId>
+            <version>${keycloak.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.keycloak/keycloak-model-legacy -->
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-model-legacy</artifactId>
+            <version>${keycloak.version}</version>
+        </dependency>
+
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
-        </dependency>
-
-        <!-- Driver MYSQL -->
-        <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>8.0.32</version>
         </dependency>
 
     </dependencies>
@@ -42,7 +50,7 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <keycloak.version>11.0.2</keycloak.version>
+        <keycloak.version>21.0.0</keycloak.version>
         <slf4j.version>2.0.6</slf4j.version>
 
         <!-- these should be updated together with Keycloak -->

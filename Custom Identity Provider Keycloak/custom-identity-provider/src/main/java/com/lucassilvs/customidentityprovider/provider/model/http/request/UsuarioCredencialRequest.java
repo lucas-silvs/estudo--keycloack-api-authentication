@@ -1,4 +1,4 @@
-package com.lucassilvs.customidentityprovider.provider.model;
+package com.lucassilvs.customidentityprovider.provider.model.http.request;
 
 public class UsuarioCredencialRequest {
 

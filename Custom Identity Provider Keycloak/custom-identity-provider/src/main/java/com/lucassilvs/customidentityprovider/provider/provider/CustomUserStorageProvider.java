@@ -1,13 +1,14 @@
 /**
  *
  */
-package com.lucassilvs.customidentityprovider.provider;
+package com.lucassilvs.customidentityprovider.provider.provider;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.lucassilvs.customidentityprovider.provider.model.UsuarioCredencialRequest;
-import com.lucassilvs.customidentityprovider.provider.model.UsuarioResponse;
+import com.lucassilvs.customidentityprovider.provider.CustomUser;
+import com.lucassilvs.customidentityprovider.provider.model.http.request.UsuarioCredencialRequest;
+import com.lucassilvs.customidentityprovider.provider.model.http.response.UsuarioResponse;
 import org.keycloak.component.ComponentModel;
 import org.keycloak.credential.CredentialInput;
 import org.keycloak.credential.CredentialInputValidator;
@@ -56,20 +57,20 @@ public class CustomUserStorageProvider implements UserStorageProvider,
     }
 
     @Override
-    public UserModel getUserById(String id, RealmModel realm) {
+    public UserModel getUserById(RealmModel realm, String id) {
         log.info("[I35] getUserById({})", id);
         StorageId sid = new StorageId(id);
-        return getUserByUsername(sid.getExternalId(), realm);
+        return getUserByUsername(realm, sid.getExternalId());
     }
 
     @Override
-    public UserModel getUserByEmail(String email, RealmModel realm) {
+    public UserModel getUserByEmail(RealmModel realm, String email) {
         log.info("[I48] getUserByEmail({})", email);
-        return getUserByUsername(email, realm);
+        return getUserByUsername(realm, email);
     }
 
     @Override
-    public UserModel getUserByUsername(String username, RealmModel realm) {
+    public UserModel getUserByUsername(RealmModel realm, String username) {
         log.info("[I41] getUserByUsername({})", username);
         String url = String.format("%s/usuario?identificador=%s", model.get(URL_AUTHENTICATOR), username);
 
@@ -171,7 +172,6 @@ public class CustomUserStorageProvider implements UserStorageProvider,
                 .lastName(nameSplit[nameSplit.length - 1])
                 .birthDate(dateTeste)
                 .build();
-
 
         return user;
     }

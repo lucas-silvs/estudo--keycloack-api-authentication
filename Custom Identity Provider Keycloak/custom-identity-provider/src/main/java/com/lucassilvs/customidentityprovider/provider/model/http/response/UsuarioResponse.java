@@ -1,4 +1,4 @@
-package com.lucassilvs.customidentityprovider.provider.model;
+package com.lucassilvs.customidentityprovider.provider.model.http.response;
 
 import java.util.Date;
 
