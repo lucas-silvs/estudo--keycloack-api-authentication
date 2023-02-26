@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.lucassilvs'
+version = '2.0.0'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    keycloakVersion = '21.0.0'
+    slf4Version = '2.0.6'
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.keycloak/keycloak-core
+    compileOnly "org.keycloak:keycloak-core:$keycloakVersion"
+    compileOnly "org.keycloak:keycloak-server-spi:$keycloakVersion"
+    compileOnly "org.keycloak:keycloak-model-legacy:$keycloakVersion"
+    implementation "org.slf4j:slf4j-api:$slf4Version"
+
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters' << "-Xlint:unchecked"
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
+
