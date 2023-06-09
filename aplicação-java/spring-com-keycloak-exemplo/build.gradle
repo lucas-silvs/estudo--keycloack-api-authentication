@@ -30,6 +30,10 @@ dependencies {
 	//delegar controle de identidade para o Keycloak, é necessário importar a biblioteca abaixo
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.0.2'
 
+	//Caching JWKS Google Guava
+	implementation 'com.google.guava:guava:31.1-jre'
+
+
 
 }
 
