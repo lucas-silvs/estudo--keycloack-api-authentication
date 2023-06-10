@@ -1,0 +1,1139 @@
+{
+	"info": {
+		"_postman_id": "5fabc4cd-b010-46a3-92e6-a1409ed9585c",
+		"name": "Keycloak - oauth2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17572927"
+	},
+	"item": [
+		{
+			"name": "springboot teste",
+			"item": [
+				{
+					"name": "security",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{acces_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ambiente}}:5000/security",
+							"host": [
+								"{{ambiente}}"
+							],
+							"port": "5000",
+							"path": [
+								"security"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{acces_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ambiente}}:5000/security/is-admin",
+							"host": [
+								"{{ambiente}}"
+							],
+							"port": "5000",
+							"path": [
+								"security",
+								"is-admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{acces_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ambiente}}:5000/security/has-role",
+							"host": [
+								"{{ambiente}}"
+							],
+							"port": "5000",
+							"path": [
+								"security",
+								"has-role"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{acces_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ambiente}}:5000/security/is-teste",
+							"host": [
+								"{{ambiente}}"
+							],
+							"port": "5000",
+							"path": [
+								"security",
+								"is-teste"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "solicitação Access Token Keycloak",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "java-teste",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "BDCEVAup0edQg8K74hSrsGM5Qb73qGUN",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "teste",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/realm-oauth2-teste/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"realm-oauth2-teste",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "solicitação Access Token Keycloak com password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "java-teste",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "BDCEVAup0edQg8K74hSrsGM5Qb73qGUN",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/realm-oauth2-teste/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"realm-oauth2-teste",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post message rest api",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJub25jZSI6Ii1VbU5acTZPNG1wSnJSSTN4Yk1qbl95OXNUVUs3aWhZTzV0V1NvSE9fTkUiLCJhbGciOiJSUzI1NiIsIng1dCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyIsImtpZCI6Ii1LSTNROW5OUjdiUm9meG1lWm9YcWJIWkdldyJ9.eyJhdWQiOiIwMDAwMDAwMy0wMDAwLTAwMDAtYzAwMC0wMDAwMDAwMDAwMDAiLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8yYTk0MmUzNy1lMjVlLTRjMjEtYjU0OS1lZjI3MzgwZGFiMGQvIiwiaWF0IjoxNjgyNjI1OTI2LCJuYmYiOjE2ODI2MjU5MjYsImV4cCI6MTY4MjYyOTgyNiwiYWlvIjoiRTJaZ1lFamN2c2FpcFVWMXd4d3hybmUvOUY0WEFBQT0iLCJhcHBfZGlzcGxheW5hbWUiOiJwcm9kdWNlciIsImFwcGlkIjoiNmNlYTlhYmUtYzFjYi00NDFhLTlkOTQtNjU4NmQ3OTMyYzIzIiwiYXBwaWRhY3IiOiIxIiwiaWRwIjoiaHR0cHM6Ly9zdHMud2luZG93cy5uZXQvMmE5NDJlMzctZTI1ZS00YzIxLWI1NDktZWYyNzM4MGRhYjBkLyIsImlkdHlwIjoiYXBwIiwicmgiOiIwLkFWQUFOeTZVS2w3aUlVeTFTZThuT0EyckRRTUFBQUFBQUFBQXdBQUFBQUFBQUFCX0FBQS4iLCJ0ZW5hbnRfcmVnaW9uX3Njb3BlIjoiTkEiLCJ0aWQiOiIyYTk0MmUzNy1lMjVlLTRjMjEtYjU0OS1lZjI3MzgwZGFiMGQiLCJ1dGkiOiI0RUk3VGhmenEwQ0kwNHVJdEpFQ0FBIiwidmVyIjoiMS4wIiwid2lkcyI6WyIwOTk3YTFkMC0wZDFkLTRhY2ItYjQwOC1kNWNhNzMxMjFlOTAiXSwieG1zX3RjZHQiOjE2ODIxOTE5NTN9.YKojxM73LXMNQ4U5oMsOmY4Tl5pJu0ZkGO5uKsa3WNpz7RHRDcF6BfNwkSRkTugAqkirCkDThPDlLS3p_Lg8gdlQgBJefOeo25MUFA10R59NTtdqTQo2xBuTO6VrW-tOZIpLI7Qzl2rarFfoHG5vJ2AUXMlZVrDKb3D1lhBa2eNRsSBTkXI7k__NpmQI5tOetCetbR9j7LuqSAkeubMiaLPDFmhB0-LoGy7SqLuBGrFn_H4s48_vuqX_BB9j8xJJi2GlDOAfLbpfSuOshyV5cvZVCOC7lulDp3RY8MKPzLotikrRrXwtbgLyH1h7ZOzrm5W8l3vpXXtbX3Aw-7HMsw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic <BASE64-encoded-key-and-secret>",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"value\": {\"type\": \"JSON\", \"data\": \"Hello World!\"}}\n{\"value\": {\"type\": \"JSON\", \"data\": \"Hola Mundo!\"}}\n{\"value\": {\"type\": \"JSON\", \"data\": \"Hola Mundo, otra vez!\"}}"
+						},
+						"url": {
+							"raw": "https://pkc-n00kk.us-east-1.aws.confluent.cloud:443/kafka/v3/clusters/lkc-oqw1mj/topics/topico--teste/records",
+							"protocol": "https",
+							"host": [
+								"pkc-n00kk",
+								"us-east-1",
+								"aws",
+								"confluent",
+								"cloud"
+							],
+							"port": "443",
+							"path": [
+								"kafka",
+								"v3",
+								"clusters",
+								"lkc-oqw1mj",
+								"topics",
+								"topico--teste",
+								"records"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "custom identity provider",
+			"item": [
+				{
+					"name": "solicitação Access Token Keycloak",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "java-teste",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "client_secret",
+									"value": "BDCEVAup0edQg8K74hSrsGM5Qb73qGUN",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "teste",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "username",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/teste-custom-identity-provider/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"teste-custom-identity-provider",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "resources api",
+			"item": [
+				{
+					"name": "clients",
+					"item": [
+						{
+							"name": "Service Account",
+							"item": [
+								{
+									"name": "Busca Service Account do Client",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody)",
+													"console.log(jsonData)",
+													"postman.setEnvironmentVariable(\"keycloak_id_service_account_client\", jsonData.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{acces_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients/{{keycloak_id_client}}/service-account-user",
+											"protocol": "http",
+											"host": [
+												"0",
+												"0",
+												"0",
+												"0"
+											],
+											"port": "8080",
+											"path": [
+												"admin",
+												"realms",
+												"{{realm}}",
+												"clients",
+												"{{keycloak_id_client}}",
+												"service-account-user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Atribui Realm Role ao Service Account",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{acces_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[   \n    {\n        \"id\": \"{{keycloak_realm_role_id}}\",\n        \"name\": \"{{keycloak_realm_role_name}}\"\n    }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/users/{{keycloak_id_service_account_client}}/role-mappings/realm",
+											"protocol": "http",
+											"host": [
+												"0",
+												"0",
+												"0",
+												"0"
+											],
+											"port": "8080",
+											"path": [
+												"admin",
+												"realms",
+												"{{realm}}",
+												"users",
+												"{{keycloak_id_service_account_client}}",
+												"role-mappings",
+												"realm"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "secrets",
+							"item": [
+								{
+									"name": "busca secret do client",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody)",
+													"console.log(jsonData)",
+													"postman.setEnvironmentVariable(\"client_secret_teste\", jsonData.value)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{acces_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients/{{keycloak_id_client}}/client-secret",
+											"protocol": "http",
+											"host": [
+												"0",
+												"0",
+												"0",
+												"0"
+											],
+											"port": "8080",
+											"path": [
+												"admin",
+												"realms",
+												"{{realm}}",
+												"clients",
+												"{{keycloak_id_client}}",
+												"client-secret"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "cria ou gera nova secret",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var jsonData = JSON.parse(responseBody)",
+													"console.log(jsonData)",
+													"postman.setEnvironmentVariable(\"client_secret_teste\", jsonData.value)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{acces_token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients/{{keycloak_id_client}}/client-secret",
+											"protocol": "http",
+											"host": [
+												"0",
+												"0",
+												"0",
+												"0"
+											],
+											"port": "8080",
+											"path": [
+												"admin",
+												"realms",
+												"{{realm}}",
+												"clients",
+												"{{keycloak_id_client}}",
+												"client-secret"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Lista Clients",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cria Client",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"clientAuthenticatorType\": \"client-secret\",\n    \"serviceAccountsEnabled\": true,\n    \"clientId\": \"teste2\",\n    \"optionalClientScopes\": [\"967e11d5-4195-44e8-8dc9-6edfb3d7728e\"]\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"clients"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "atualiza Client",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"defaultClientScopes\": [\"teste\", \"teste2\"],\n    \"clientId\": \"{{client_id_teste}}\",\n     \"description\": \"teste alteração\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients/{{keycloak_id_client}}",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"clients",
+										"{{keycloak_id_client}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca Client pelo Client ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody)",
+											"console.log(jsonData)",
+											"postman.setEnvironmentVariable(\"keycloak_id_client\", jsonData[0].id)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients?clientId={{client_id_teste}}",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"clients"
+									],
+									"query": [
+										{
+											"key": "clientId",
+											"value": "{{client_id_teste}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Request Token teste cliente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "client_id",
+											"value": "{{client_id_teste}}",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "{{client_secret_teste}}",
+											"type": "text"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "text"
+										},
+										{
+											"key": "scope",
+											"value": "confluent",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "http://0.0.0.0:8080/realms/{{realm}}/protocol/openid-connect/token",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"realms",
+										"{{realm}}",
+										"protocol",
+										"openid-connect",
+										"token"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Atribui Client Scope a um Client",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/clients/{{keycloak_id_client}}/default-client-scopes/967e11d5-4195-44e8-8dc9-6edfb3d7728e",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"clients",
+										"{{keycloak_id_client}}",
+										"default-client-scopes",
+										"967e11d5-4195-44e8-8dc9-6edfb3d7728e"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Realm Roles",
+					"item": [
+						{
+							"name": "Lista Realm Roles",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/roles",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cria Realm Role",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"subdominio_B\",\n    \"description\": \"realm role criada via REST API\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/roles",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Busca Realm role pelo nome",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = JSON.parse(responseBody)",
+											"console.log(jsonData)",
+											"postman.setEnvironmentVariable(\"keycloak_realm_role_id\", jsonData.id)",
+											"postman.setEnvironmentVariable(\"keycloak_realm_role_name\", jsonData.name)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/roles/subdominio_B",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"roles",
+										"subdominio_B"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "client Scope",
+					"item": [
+						{
+							"name": "lista Client Scope",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/client-scopes",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"client-scopes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "cria Client Scope",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{acces_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n        \"name\": \"client-scope-teste-api\",\n        \"description\": \"client scope criado via Admin Rest API\",\n        \"protocol\": \"openid-connect\",\n        \"attributes\": {\n            \"include.in.token.scope\": \"true\",\n            \"display.on.consent.screen\": \"true\",\n            \"gui.order\": \"\",\n            \"consent.screen.text\": \"\"\n        },\n        \"protocolMappers\": [\n            {\n                \"name\": \"subdominio-mapper-api\",\n                \"protocol\": \"openid-connect\",\n                \"protocolMapper\": \"oidc-usermodel-realm-role-mapper\",\n                \"consentRequired\": false,\n                \"config\": {\n                    \"id.token.claim\": \"true\",\n                    \"access.token.claim\": \"true\",\n                    \"claim.name\": \"subdomain\",\n                    \"multivalued\": \"true\",\n                    \"userinfo.token.claim\": \"true\"\n                }\n            }\n        ]\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://0.0.0.0:8080/admin/realms/{{realm}}/client-scopes",
+									"protocol": "http",
+									"host": [
+										"0",
+										"0",
+										"0",
+										"0"
+									],
+									"port": "8080",
+									"path": [
+										"admin",
+										"realms",
+										"{{realm}}",
+										"client-scopes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Request Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)",
+									"console.log(jsonData)",
+									"postman.setEnvironmentVariable(\"acces_token\", jsonData.access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "confluent",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://0.0.0.0:8080/realms/{{realm}}/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"0",
+								"0",
+								"0",
+								"0"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"{{realm}}",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
