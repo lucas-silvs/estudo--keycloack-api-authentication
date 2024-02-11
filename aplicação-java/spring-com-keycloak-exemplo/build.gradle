@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.2'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id 'org.springframework.boot' version '3.2.2'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'com.lucassilvs.'
@@ -16,19 +16,18 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework:spring-web:6.0.4'
 
 
 	// dependencias para autenticar aplicação com o Keycloak
 
 	//oauth2
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
 	//spring security
-	implementation 'org.springframework.boot:spring-boot-starter-security:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//delegar controle de identidade para o Keycloak, é necessário importar a biblioteca abaixo
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 
 	//Caching JWKS Google Guava
 	implementation 'com.google.guava:guava:31.1-jre'
