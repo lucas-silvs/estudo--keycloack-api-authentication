@@ -38,10 +38,13 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz.requestMatchers("/security/**").authenticated())
-                .oauth2ResourceServer()
-                .jwt()
-                .decoder(jwksCacheDecoder())
-                .jwtAuthenticationConverter(keycloakJwtAuthenticationConverter);
+
+                .oauth2ResourceServer(
+                        oauth2 -> oauth2.jwt(
+                                jwt -> jwt.decoder(
+                                        jwksCacheDecoder())
+                                        .jwtAuthenticationConverter(keycloakJwtAuthenticationConverter))
+                );
 
         return http.build();
     }

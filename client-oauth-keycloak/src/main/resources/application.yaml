@@ -1,0 +1,23 @@
+server:
+  port: 5001
+
+spring:
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=4m
+    cache-names: token
+
+
+
+
+oidc:
+    clientId: aplicacao-teste
+    clientSecret: yPPoxhUjvX2VLPLhCawNC2PzuWQrGzhn
+    grantType: client_credentials
+    tokenUri: http://localhost:8080/realms/realm-oauth2-teste/protocol/openid-connect/token
+    scope: email
+
+
+service:
+    url: http://localhost:5000/security/has-role

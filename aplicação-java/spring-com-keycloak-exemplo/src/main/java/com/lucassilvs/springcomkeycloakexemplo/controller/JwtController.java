@@ -39,6 +39,11 @@ public class JwtController {
         return ResponseEntity.ok("Teste");
     }
 
+    @GetMapping(value = "/is-any")
+    public ResponseEntity<String> isAny() {
+        return ResponseEntity.ok("Teste");
+    }
+
 
 
 }
