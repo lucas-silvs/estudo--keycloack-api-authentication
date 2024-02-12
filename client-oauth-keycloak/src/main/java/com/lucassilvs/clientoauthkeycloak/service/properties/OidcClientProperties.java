@@ -1,17 +1,22 @@
-package com.lucassilvs.clientoauthkeycloak.service;
+package com.lucassilvs.clientoauthkeycloak.service.properties;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
-@ConfigurationProperties(prefix = "oidc")
-@Component
-public class OidcServerProperties {
+
+public class OidcClientProperties {
 
     private  String clientId;
     private  String clientSecret;
     private  String tokenUri;
     private  String grantType;
     private  String scope;
+
+    public OidcClientProperties(String clientId, String clientSecret, String tokenUri, String grantType, String scope) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.tokenUri = tokenUri;
+        this.grantType = grantType;
+        this.scope = scope;
+    }
 
     public void setClientId(String clientId) {
         this.clientId = clientId;

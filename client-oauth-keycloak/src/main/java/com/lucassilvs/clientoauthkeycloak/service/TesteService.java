@@ -21,9 +21,9 @@ public class TesteService {
     }
 
 
-    public String getResourceFromProtectedEndpoint() {
+    public String getResourceFromProtectedEndpoint(String realm) {
 
-        String token = tokenService.getToken();
+        String token = tokenService.getToken(realm);
 
         // Use o RestTemplate com o token de acesso para fazer solicitações autenticadas
 

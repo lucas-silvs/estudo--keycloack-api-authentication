@@ -2,9 +2,9 @@ package com.lucassilvs.clientoauthkeycloak.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.lucassilvs.clientoauthkeycloak.gateway.OidcGateway;
+import com.lucassilvs.clientoauthkeycloak.service.properties.OidcClientsListProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +14,20 @@ import java.time.format.DateTimeFormatter;
 @Service
 public class tokenService {
 
-    private final OidcGateway oidcClient;
+    private final OidcGateway oidcRestClient;
+
+    private final OidcClientsListProperties clientsListProperties;
 
     @Autowired
-    public tokenService(OidcGateway oidcClient) {
-        this.oidcClient = oidcClient;
+    public tokenService(OidcGateway oidcRestClient, OidcClientsListProperties clientsListProperties) {
+        this.oidcRestClient = oidcRestClient;
+        this.clientsListProperties = clientsListProperties;
     }
 
-    @Cacheable("token")
-    public String getToken(){
-        ResponseEntity<JsonNode> responseEntity = oidcClient.getTokenOidcProvider();
+    @Cacheable(value = "token", key = "#realm")
+    public String getToken(String realm){
+
+        ResponseEntity<JsonNode> responseEntity = oidcRestClient.getTokenOidcProvider(clientsListProperties.getClientByRealm(realm));
 
         if (responseEntity.getStatusCode() == HttpStatus.OK) {
             JsonNode tokenResponse = responseEntity.getBody();
