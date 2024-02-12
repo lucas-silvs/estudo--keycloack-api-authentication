@@ -5,7 +5,7 @@ spring:
   cache:
     type: caffeine
     caffeine:
-      spec: expireAfterWrite=4m
+      spec: expireAfterWrite=48s # deve ser definido 80% do tempo total do token
     cache-names: token
 
 
