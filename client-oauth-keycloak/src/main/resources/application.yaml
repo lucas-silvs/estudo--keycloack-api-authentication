@@ -1,0 +1,32 @@
+server:
+  port: 5001
+
+spring:
+  cache:
+    type: caffeine
+    caffeine:
+      spec: expireAfterWrite=48s # deve ser definido 80% do tempo total do token
+    cache-names: token
+
+
+
+
+oidc:
+  clients:
+    realm-oauth2-teste:
+      clientId: aplicacao-teste
+      clientSecret: yPPoxhUjvX2VLPLhCawNC2PzuWQrGzhn
+      grantType: client_credentials
+      tokenUri: http://localhost:8080/realms/realm-oauth2-teste/protocol/openid-connect/token
+      scope: email
+
+    realm-teste-2:
+      clientId: aplicacao-teste-2
+      clientSecret: 7SRR5kRW0hJZvwAA79mBgVL4Tsnb5rht
+      grantType: client_credentials
+      tokenUri: http://localhost:8080/realms/realm-teste-2/protocol/openid-connect/token
+      scope: email
+
+
+service:
+    url: http://localhost:5000/security/is-teste
